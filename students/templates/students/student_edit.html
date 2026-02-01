@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Student</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="page-title">
+            <i class="fas fa-edit"></i>
+            Edit Student
+        </h1>
+
+        <div style="background-color: #e8f4fc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <p style="margin: 0;">
+                <i class="fas fa-info-circle"></i>
+                You are editing student: <strong>{{ student.name }}</strong> (ID: {{ student.id }})
+            </p>
+        </div>
+
+        <form method="post" class="student-form">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label class="form-label" for="name">
+                    <i class="fas fa-user"></i> Full Name *
+                </label>
+                <input type="text" 
+                       name="name" 
+                       id="name" 
+                       class="form-input" 
+                       value="{{ student.name }}"
+                       placeholder="Enter student name" 
+                       required
+                       maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email">
+                    <i class="fas fa-envelope"></i> Email Address *
+                </label>
+                <input type="email" 
+                       name="email" 
+                       id="email" 
+                       class="form-input"
+                       value="{{ student.email }}"
+                       placeholder="example@email.com" 
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="age">
+                    <i class="fas fa-birthday-cake"></i> Age *
+                </label>
+                <input type="number" 
+                       name="age" 
+                       id="age" 
+                       class="form-input"
+                       value="{{ student.age }}"
+                       placeholder="Enter age" 
+                       required 
+                       min="1" 
+                       max="100">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn form-submit">
+                    <i class="fas fa-save"></i> Update Student
+                </button>
+                
+                <a href="{% url 'student_list' %}" class="btn btn-back" style="margin-left: 10px;">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
+            </div>
+        </form>
+
+        <div class="back-container">
+            <a href="{% url 'student_list' %}" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Students List
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Pre-fill form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const age = document.getElementById('age').value;
+            
+            if (!name) {
+                e.preventDefault();
+                alert('Please enter student name.');
+                document.getElementById('name').focus();
+                return false;
+            }
+            
+            if (!email) {
+                e.preventDefault();
+                alert('Please enter email address.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            if (!email.includes('@')) {
+                e.preventDefault();
+                alert('Please enter a valid email address.');
+                document.getElementById('email').focus();
+                return false;
+            }
+            
+            if (!age || age < 1 || age > 100) {
+                e.preventDefault();
+                alert('Please enter a valid age (1-100).');
+                document.getElementById('age').focus();
+                return false;
+            }
+            
+            return true;
+        });
+    </script>
+
+</body>
+</html>

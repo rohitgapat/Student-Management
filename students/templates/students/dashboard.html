@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'students/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="main-title">
+            <i class="fas fa-graduation-cap"></i>
+            Student Management System
+        </h1>
+
+        <div class="dashboard">
+            <a class="dashboard-btn btn-view" href="{% url 'student_list' %}">
+                <i class="fas fa-users"></i>
+                <span>View All Students</span>
+                <small>See all student records</small>
+            </a>
+            
+            <a class="dashboard-btn btn-add" href="{% url 'student_add' %}">
+                <i class="fas fa-user-plus"></i>
+                <span>Add New Student</span>
+                <small>Create new student record</small>
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 10px;">
+            <h3><i class="fas fa-info-circle"></i> How to Use</h3>
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px; flex-wrap: wrap;">
+                <div style="text-align: center; max-width: 200px;">
+                    <i class="fas fa-plus-circle fa-2x" style="color: #2ecc71;"></i>
+                    <p><strong>Add</strong> - Create new student entries</p>
+                </div>
+                <div style="text-align: center; max-width: 200px;">
+                    <i class="fas fa-edit fa-2x" style="color: #f39c12;"></i>
+                    <p><strong>Edit</strong> - Update student information</p>
+                    <small>(Available in student list)</small>
+                </div>
+                <div style="text-align: center; max-width: 200px;">
+                    <i class="fas fa-trash fa-2x" style="color: #e74c3c;"></i>
+                    <p><strong>Delete</strong> - Remove student records</p>
+                    <small>(Available in student list)</small>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 15px; background-color: #e8f4fc; border-radius: 8px;">
+                <p style="margin: 0;">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Tip:</strong> Click "View All Students" to see Edit and Delete options for each student
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
